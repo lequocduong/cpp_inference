@@ -1,0 +1,27 @@
+# Cmake following Pytorch C++
+cd build
+cmake -DCMAKE_PREFIX_PATH=/home/lqd159753/miniforge3/envs/lqd/lib/python3.12/site-packages ..
+cmake --build . --config Release
+OR
+cmake ..
+make
+
+// Load time : 
+
+
+*** Version:
+C++ 17
+OpenCV - 4.5.4
+Pytorch : 2.3.1
+
+*** CMakeLists.txt
+
+
+
+
+*** Input_pipeline :
+Ref: 
+https://github.com/rlggyp/YOLOv10-OpenVINO-CPP-Inference/blob/main/src/inference.cc
+https://github.com/dacquaviva/yolov5-openvino-cpp-python
+
+*** C++ check code:

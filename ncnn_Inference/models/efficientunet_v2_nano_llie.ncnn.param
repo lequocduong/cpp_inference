@@ -1,0 +1,174 @@
+7767517
+172 203
+Input                    in0                      0 1 in0
+Padding                  pad_4                    1 1 in0 1 0=0 1=8 2=0 3=0 4=1 5=0 6=0
+Convolution              conv_17                  1 1 1 2 0=8 1=2 11=2 12=1 13=2 14=0 2=1 3=2 4=0 5=1 6=96
+Split                    splitncnn_0              1 2 2 3 4
+Reduction                mean_46                  1 1 4 5 0=3 1=0 -23303=1,0 4=1 5=1
+BinaryOp                 sub_0                    2 1 3 5 6 0=1
+Split                    splitncnn_1              1 2 6 7 8
+UnaryOp                  pow_1                    1 1 7 9 0=4
+Reduction                mean_47                  1 1 9 10 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_388            0 1 11 0=1 1=1 2=8
+MemoryData               onnx::Add_390            0 1 12 0=1 1=1 2=8
+BinaryOp                 add_2                    1 1 10 13 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_3                   1 1 13 14 0=5
+BinaryOp                 div_4                    2 1 8 14 15 0=3
+BinaryOp                 mul_5                    2 1 11 15 16 0=2
+BinaryOp                 add_6                    2 1 16 12 17 0=0
+Split                    splitncnn_2              1 2 17 18 19
+Convolution              conv_18                  1 1 19 20 0=32 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=2304
+Swish                    silu_9                   1 1 20 21
+Split                    splitncnn_3              1 2 21 22 23
+Pooling                  gap_0                    1 1 23 24 0=1 4=1
+Convolution              conv_19                  1 1 24 25 0=2 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=64
+Swish                    silu_10                  1 1 25 26
+Convolution              convsigmoid_0            1 1 26 27 0=32 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=64 9=4
+Reshape                  reshape_42               1 1 27 28 0=1 1=1 2=-1
+BinaryOp                 mul_7                    2 1 22 28 29 0=2
+Convolution              conv_21                  1 1 29 30 0=8 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=256
+BinaryOp                 add_8                    2 1 30 18 31 0=0
+Split                    splitncnn_4              1 4 31 32 33 34 35
+Reduction                mean_48                  1 1 35 36 0=3 1=0 -23303=1,0 4=1 5=1
+Split                    splitncnn_5              1 2 36 37 38
+BinaryOp                 sub_9                    2 1 33 37 39 0=1
+UnaryOp                  pow_10                   1 1 39 40 0=4
+Reduction                mean_49                  1 1 40 41 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_392            0 1 42 0=1 1=1 2=8
+MemoryData               onnx::Add_394            0 1 43 0=1 1=1 2=8
+BinaryOp                 add_11                   1 1 41 44 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_12                  1 1 44 45 0=5
+BinaryOp                 sub_13                   2 1 34 38 46 0=1
+BinaryOp                 div_14                   2 1 46 45 47 0=3
+BinaryOp                 mul_15                   2 1 42 47 48 0=2
+BinaryOp                 add_16                   2 1 48 43 49 0=0
+Convolution              conv_22                  1 1 49 50 0=16 1=2 11=2 12=1 13=2 14=0 2=1 3=2 4=0 5=1 6=512
+Split                    splitncnn_6              1 2 50 51 52
+Convolution              conv_23                  1 1 52 53 0=64 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=9216
+Swish                    silu_11                  1 1 53 54
+Split                    splitncnn_7              1 2 54 55 56
+Pooling                  gap_1                    1 1 56 57 0=1 4=1
+Convolution              conv_24                  1 1 57 58 0=4 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=256
+Swish                    silu_12                  1 1 58 59
+Convolution              convsigmoid_1            1 1 59 60 0=64 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=256 9=4
+Reshape                  reshape_43               1 1 60 61 0=1 1=1 2=-1
+BinaryOp                 mul_17                   2 1 55 61 62 0=2
+Convolution              conv_26                  1 1 62 63 0=16 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=1024
+BinaryOp                 add_18                   2 1 63 51 64 0=0
+Split                    splitncnn_8              1 4 64 65 66 67 68
+Reduction                mean_50                  1 1 68 69 0=3 1=0 -23303=1,0 4=1 5=1
+Split                    splitncnn_9              1 2 69 70 71
+BinaryOp                 sub_19                   2 1 66 70 72 0=1
+UnaryOp                  pow_20                   1 1 72 73 0=4
+Reduction                mean_51                  1 1 73 74 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_396            0 1 75 0=1 1=1 2=16
+MemoryData               onnx::Add_398            0 1 76 0=1 1=1 2=16
+BinaryOp                 add_21                   1 1 74 77 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_22                  1 1 77 78 0=5
+BinaryOp                 sub_23                   2 1 67 71 79 0=1
+BinaryOp                 div_24                   2 1 79 78 80 0=3
+BinaryOp                 mul_25                   2 1 75 80 81 0=2
+BinaryOp                 add_26                   2 1 81 76 82 0=0
+Convolution              conv_27                  1 1 82 83 0=32 1=2 11=2 12=1 13=2 14=0 2=1 3=2 4=0 5=1 6=2048
+Split                    splitncnn_10             1 2 83 84 85
+Convolution              conv_28                  1 1 85 86 0=128 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=36864
+Swish                    silu_13                  1 1 86 87
+Split                    splitncnn_11             1 2 87 88 89
+Pooling                  gap_2                    1 1 89 90 0=1 4=1
+Convolution              conv_29                  1 1 90 91 0=8 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=1024
+Swish                    silu_14                  1 1 91 92
+Convolution              convsigmoid_2            1 1 92 93 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=1024 9=4
+Reshape                  reshape_44               1 1 93 94 0=1 1=1 2=-1
+BinaryOp                 mul_27                   2 1 88 94 95 0=2
+Convolution              conv_31                  1 1 95 96 0=32 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=4096
+BinaryOp                 add_28                   2 1 96 84 97 0=0
+Split                    splitncnn_12             1 4 97 98 99 100 101
+Reduction                mean_52                  1 1 101 102 0=3 1=0 -23303=1,0 4=1 5=1
+Split                    splitncnn_13             1 2 102 103 104
+BinaryOp                 sub_29                   2 1 99 103 105 0=1
+UnaryOp                  pow_30                   1 1 105 106 0=4
+Reduction                mean_53                  1 1 106 107 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_400            0 1 108 0=1 1=1 2=32
+MemoryData               onnx::Add_402            0 1 109 0=1 1=1 2=32
+BinaryOp                 add_31                   1 1 107 110 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_32                  1 1 110 111 0=5
+BinaryOp                 sub_33                   2 1 100 104 112 0=1
+BinaryOp                 div_34                   2 1 112 111 113 0=3
+BinaryOp                 mul_35                   2 1 108 113 114 0=2
+BinaryOp                 add_36                   2 1 114 109 115 0=0
+Convolution              conv_32                  1 1 115 116 0=64 1=2 11=2 12=1 13=2 14=0 2=1 3=2 4=0 5=1 6=8192
+Split                    splitncnn_14             1 2 116 117 118
+Convolution              conv_33                  1 1 118 119 0=256 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=147456
+Swish                    silu_15                  1 1 119 120
+Split                    splitncnn_15             1 2 120 121 122
+Pooling                  gap_3                    1 1 122 123 0=1 4=1
+Convolution              conv_34                  1 1 123 124 0=16 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=4096
+Swish                    silu_16                  1 1 124 125
+Convolution              convsigmoid_3            1 1 125 126 0=256 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=4096 9=4
+Reshape                  reshape_45               1 1 126 127 0=1 1=1 2=-1
+BinaryOp                 mul_37                   2 1 121 127 128 0=2
+Convolution              conv_36                  1 1 128 129 0=64 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=16384
+BinaryOp                 add_38                   2 1 129 117 130 0=0
+Split                    splitncnn_16             1 2 130 131 132
+Concat                   cat_0                    2 1 131 132 133 0=0
+Split                    splitncnn_17             1 2 133 134 135
+Reduction                mean_54                  1 1 135 136 0=3 1=0 -23303=1,0 4=1 5=1
+BinaryOp                 sub_39                   2 1 134 136 137 0=1
+Split                    splitncnn_18             1 2 137 138 139
+UnaryOp                  pow_40                   1 1 138 140 0=4
+Reduction                mean_55                  1 1 140 141 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_404            0 1 142 0=1 1=1 2=128
+MemoryData               onnx::Add_406            0 1 143 0=1 1=1 2=128
+BinaryOp                 add_41                   1 1 141 144 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_42                  1 1 144 145 0=5
+BinaryOp                 div_43                   2 1 139 145 146 0=3
+BinaryOp                 mul_44                   2 1 142 146 147 0=2
+BinaryOp                 add_45                   2 1 147 143 148 0=0
+Deconvolution            deconv_38                1 1 148 149 0=32 1=2 11=2 12=1 13=2 14=0 18=0 19=0 2=1 3=2 4=0 5=1 6=16384
+Concat                   cat_1                    2 1 149 98 150 0=0
+Split                    splitncnn_19             1 2 150 151 152
+Reduction                mean_56                  1 1 152 153 0=3 1=0 -23303=1,0 4=1 5=1
+BinaryOp                 sub_46                   2 1 151 153 154 0=1
+Split                    splitncnn_20             1 2 154 155 156
+UnaryOp                  pow_47                   1 1 155 157 0=4
+Reduction                mean_57                  1 1 157 158 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_408            0 1 159 0=1 1=1 2=64
+MemoryData               onnx::Add_410            0 1 160 0=1 1=1 2=64
+BinaryOp                 add_48                   1 1 158 161 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_49                  1 1 161 162 0=5
+BinaryOp                 div_50                   2 1 156 162 163 0=3
+BinaryOp                 mul_51                   2 1 159 163 164 0=2
+BinaryOp                 add_52                   2 1 164 160 165 0=0
+Deconvolution            deconv_39                1 1 165 166 0=16 1=2 11=2 12=1 13=2 14=0 18=0 19=0 2=1 3=2 4=0 5=1 6=4096
+Concat                   cat_2                    2 1 166 65 167 0=0
+Split                    splitncnn_21             1 2 167 168 169
+Reduction                mean_58                  1 1 169 170 0=3 1=0 -23303=1,0 4=1 5=1
+BinaryOp                 sub_53                   2 1 168 170 171 0=1
+Split                    splitncnn_22             1 2 171 172 173
+UnaryOp                  pow_54                   1 1 172 174 0=4
+Reduction                mean_59                  1 1 174 175 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_412            0 1 176 0=1 1=1 2=32
+MemoryData               onnx::Add_414            0 1 177 0=1 1=1 2=32
+BinaryOp                 add_55                   1 1 175 178 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_56                  1 1 178 179 0=5
+BinaryOp                 div_57                   2 1 173 179 180 0=3
+BinaryOp                 mul_58                   2 1 176 180 181 0=2
+BinaryOp                 add_59                   2 1 181 177 182 0=0
+Deconvolution            deconv_40                1 1 182 183 0=8 1=2 11=2 12=1 13=2 14=0 18=0 19=0 2=1 3=2 4=0 5=1 6=1024
+Concat                   cat_3                    2 1 183 32 184 0=0
+Split                    splitncnn_23             1 2 184 185 186
+Reduction                mean_60                  1 1 186 187 0=3 1=0 -23303=1,0 4=1 5=1
+BinaryOp                 sub_60                   2 1 185 187 188 0=1
+Split                    splitncnn_24             1 2 188 189 190
+UnaryOp                  pow_61                   1 1 189 191 0=4
+Reduction                mean_61                  1 1 191 192 0=3 1=0 -23303=1,0 4=1 5=1
+MemoryData               onnx::Mul_416            0 1 193 0=1 1=1 2=16
+MemoryData               onnx::Add_418            0 1 194 0=1 1=1 2=16
+BinaryOp                 add_62                   1 1 192 195 0=0 1=1 2=1.000000e-06
+UnaryOp                  sqrt_63                  1 1 195 196 0=5
+BinaryOp                 div_64                   2 1 190 196 197 0=3
+BinaryOp                 mul_65                   2 1 193 197 198 0=2
+BinaryOp                 add_66                   2 1 198 194 199 0=0
+Deconvolution            deconv_41                1 1 199 200 0=4 1=2 11=2 12=1 13=2 14=0 18=0 19=0 2=1 3=2 4=0 5=1 6=256
+Convolution              conv_37                  1 1 200 201 0=3 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=12
+Crop                     slice_0                  1 1 201 out0 -23310=1,1080 -23311=1,1 -23309=1,0

@@ -1,0 +1,106 @@
+7767517
+104 103
+pnnx.Input               pnnx_input_0             0 1 0 #0=(1,3,1088,1920)f32
+nn.Conv2d                conv2d_0                 1 1 0 1 bias=True dilation=(1,1) groups=1 in_channels=3 kernel_size=(2,2) out_channels=16 padding=(0,0) padding_mode=replicate stride=(2,2) @bias=(16)f32 @weight=(16,3,2,2)f32 $input=0 #0=(1,3,1088,1920)f32 #1=(1,16,544,960)f32
+Tensor.permute           op_0_2                   1 1 1 2 dims=(0,2,3,1) $input=1 #1=(1,16,544,960)f32
+nn.LayerNorm             op_1_1                   1 1 2 3 elementwise_affine=True eps=1.000000e-06 normalized_shape=(16) @bias=(16)f32 @weight=(16)f32
+Tensor.permute           op_2_0                   1 1 3 4 dims=(0,3,1,2) #4=(1,16,544,960)f32
+nn.Conv2d                stages.0.0.dwconv        1 1 4 5 bias=True dilation=(1,1) groups=16 in_channels=16 kernel_size=(7,7) out_channels=16 padding=(3,3) padding_mode=zeros stride=(1,1) @bias=(16)f32 @weight=(16,1,7,7)f32 #4=(1,16,544,960)f32 #5=(1,16,544,960)f32
+Tensor.permute           Tensor.permute_6         1 1 5 6 dims=(0,2,3,1) $input=5 #5=(1,16,544,960)f32 #6=(1,544,960,16)f32
+nn.LayerNorm             ln_0                     1 1 6 7 elementwise_affine=True eps=1.000000e-06 normalized_shape=(16) @bias=(16)f32 @weight=(16)f32 $input=6 #6=(1,544,960,16)f32 #7=(1,544,960,16)f32
+nn.Linear                stages.0.0.pwconv1       1 1 7 8 bias=True in_features=16 out_features=64 @bias=(64)f32 @weight=(64,16)f32 #7=(1,544,960,16)f32 #8=(1,544,960,64)f32
+nn.GELU                  stages.0.0.act           1 1 8 9 #8=(1,544,960,64)f32 #9=(1,544,960,64)f32
+pnnx.Attribute           stages.0.0.grn           0 1 10 @data=(1,1,1,64)f32 #10=(1,1,1,64)f32
+pnnx.Attribute           pnnx_unique_2            0 1 11 @data=(1,1,1,64)f32 #11=(1,1,1,64)f32
+torch.norm               torch.norm_61            1 1 9 12 dim=(1,2) keepdim=True p=2 $input=9 #9=(1,544,960,64)f32 #12=(1,1,1,64)f32
+torch.mean               torch.mean_42            1 1 12 13 dim=(-1) keepdim=True $input=12 #12=(1,1,1,64)f32 #13=(1,1,1,1)f32
+pnnx.Expression          pnnx_expr_349            5 1 11 9 12 13 10 14 expr=add(add(mul(@0,mul(@1,div(@2,add(@3,1.000000e-06)))),@4),@1) #11=(1,1,1,64)f32 #9=(1,544,960,64)f32 #12=(1,1,1,64)f32 #13=(1,1,1,1)f32 #10=(1,1,1,64)f32 #14=(1,544,960,64)f32
+nn.Linear                stages.0.0.pwconv2       1 1 14 15 bias=True in_features=64 out_features=16 @bias=(16)f32 @weight=(16,64)f32 #14=(1,544,960,64)f32 #15=(1,544,960,16)f32
+Tensor.permute           Tensor.permute_7         1 1 15 16 dims=(0,3,1,2) $input=15 #15=(1,544,960,16)f32 #16=(1,16,544,960)f32
+pnnx.Expression          pnnx_expr_342            2 1 4 16 17 expr=add(@0,@1) #4=(1,16,544,960)f32 #16=(1,16,544,960)f32 #17=(1,16,544,960)f32
+Tensor.permute           op_0_5                   1 1 17 18 dims=(0,2,3,1) $input=17 #17=(1,16,544,960)f32
+nn.LayerNorm             op_1_4                   1 1 18 19 elementwise_affine=True eps=1.000000e-06 normalized_shape=(16) @bias=(16)f32 @weight=(16)f32
+Tensor.permute           op_2_3                   1 1 19 20 dims=(0,3,1,2) #20=(1,16,544,960)f32
+nn.Conv2d                downsample_layers.1.1    1 1 20 21 bias=True dilation=(1,1) groups=1 in_channels=16 kernel_size=(2,2) out_channels=32 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(32)f32 @weight=(32,16,2,2)f32 #20=(1,16,544,960)f32 #21=(1,32,272,480)f32
+nn.Conv2d                stages.1.0.dwconv        1 1 21 22 bias=True dilation=(1,1) groups=32 in_channels=32 kernel_size=(7,7) out_channels=32 padding=(3,3) padding_mode=zeros stride=(1,1) @bias=(32)f32 @weight=(32,1,7,7)f32 #21=(1,32,272,480)f32 #22=(1,32,272,480)f32
+Tensor.permute           Tensor.permute_8         1 1 22 23 dims=(0,2,3,1) $input=22 #22=(1,32,272,480)f32 #23=(1,272,480,32)f32
+nn.LayerNorm             ln_1                     1 1 23 24 elementwise_affine=True eps=1.000000e-06 normalized_shape=(32) @bias=(32)f32 @weight=(32)f32 $input=23 #23=(1,272,480,32)f32 #24=(1,272,480,32)f32
+nn.Linear                stages.1.0.pwconv1       1 1 24 25 bias=True in_features=32 out_features=128 @bias=(128)f32 @weight=(128,32)f32 #24=(1,272,480,32)f32 #25=(1,272,480,128)f32
+nn.GELU                  stages.1.0.act           1 1 25 26 #25=(1,272,480,128)f32 #26=(1,272,480,128)f32
+pnnx.Attribute           stages.1.0.grn           0 1 27 @data=(1,1,1,128)f32 #27=(1,1,1,128)f32
+pnnx.Attribute           pnnx_unique_5            0 1 28 @data=(1,1,1,128)f32 #28=(1,1,1,128)f32
+torch.norm               torch.norm_62            1 1 26 29 dim=(1,2) keepdim=True p=2 $input=26 #26=(1,272,480,128)f32 #29=(1,1,1,128)f32
+torch.mean               torch.mean_45            1 1 29 30 dim=(-1) keepdim=True $input=29 #29=(1,1,1,128)f32 #30=(1,1,1,1)f32
+pnnx.Expression          pnnx_expr_290            5 1 28 26 29 30 27 31 expr=add(add(mul(@0,mul(@1,div(@2,add(@3,1.000000e-06)))),@4),@1) #28=(1,1,1,128)f32 #26=(1,272,480,128)f32 #29=(1,1,1,128)f32 #30=(1,1,1,1)f32 #27=(1,1,1,128)f32 #31=(1,272,480,128)f32
+nn.Linear                stages.1.0.pwconv2       1 1 31 32 bias=True in_features=128 out_features=32 @bias=(32)f32 @weight=(32,128)f32 #31=(1,272,480,128)f32 #32=(1,272,480,32)f32
+Tensor.permute           Tensor.permute_9         1 1 32 33 dims=(0,3,1,2) $input=32 #32=(1,272,480,32)f32 #33=(1,32,272,480)f32
+pnnx.Expression          pnnx_expr_283            2 1 21 33 34 expr=add(@0,@1) #21=(1,32,272,480)f32 #33=(1,32,272,480)f32 #34=(1,32,272,480)f32
+Tensor.permute           op_0_8                   1 1 34 35 dims=(0,2,3,1) $input=34 #34=(1,32,272,480)f32
+nn.LayerNorm             op_1_7                   1 1 35 36 elementwise_affine=True eps=1.000000e-06 normalized_shape=(32) @bias=(32)f32 @weight=(32)f32
+Tensor.permute           op_2_6                   1 1 36 37 dims=(0,3,1,2) #37=(1,32,272,480)f32
+nn.Conv2d                downsample_layers.2.1    1 1 37 38 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(2,2) out_channels=64 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(64)f32 @weight=(64,32,2,2)f32 #37=(1,32,272,480)f32 #38=(1,64,136,240)f32
+nn.Conv2d                stages.2.0.dwconv        1 1 38 39 bias=True dilation=(1,1) groups=64 in_channels=64 kernel_size=(7,7) out_channels=64 padding=(3,3) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1,7,7)f32 #38=(1,64,136,240)f32 #39=(1,64,136,240)f32
+Tensor.permute           Tensor.permute_10        1 1 39 40 dims=(0,2,3,1) $input=39 #39=(1,64,136,240)f32 #40=(1,136,240,64)f32
+nn.LayerNorm             ln_2                     1 1 40 41 elementwise_affine=True eps=1.000000e-06 normalized_shape=(64) @bias=(64)f32 @weight=(64)f32 $input=40 #40=(1,136,240,64)f32 #41=(1,136,240,64)f32
+nn.Linear                stages.2.0.pwconv1       1 1 41 42 bias=True in_features=64 out_features=256 @bias=(256)f32 @weight=(256,64)f32 #41=(1,136,240,64)f32 #42=(1,136,240,256)f32
+nn.GELU                  stages.2.0.act           1 1 42 43 #42=(1,136,240,256)f32 #43=(1,136,240,256)f32
+pnnx.Attribute           stages.2.0.grn           0 1 44 @data=(1,1,1,256)f32 #44=(1,1,1,256)f32
+pnnx.Attribute           pnnx_unique_8            0 1 45 @data=(1,1,1,256)f32 #45=(1,1,1,256)f32
+torch.norm               torch.norm_63            1 1 43 46 dim=(1,2) keepdim=True p=2 $input=43 #43=(1,136,240,256)f32 #46=(1,1,1,256)f32
+torch.mean               torch.mean_48            1 1 46 47 dim=(-1) keepdim=True $input=46 #46=(1,1,1,256)f32 #47=(1,1,1,1)f32
+pnnx.Expression          pnnx_expr_231            5 1 45 43 46 47 44 48 expr=add(add(mul(@0,mul(@1,div(@2,add(@3,1.000000e-06)))),@4),@1) #45=(1,1,1,256)f32 #43=(1,136,240,256)f32 #46=(1,1,1,256)f32 #47=(1,1,1,1)f32 #44=(1,1,1,256)f32 #48=(1,136,240,256)f32
+nn.Linear                stages.2.0.pwconv2       1 1 48 49 bias=True in_features=256 out_features=64 @bias=(64)f32 @weight=(64,256)f32 #48=(1,136,240,256)f32 #49=(1,136,240,64)f32
+Tensor.permute           Tensor.permute_11        1 1 49 50 dims=(0,3,1,2) $input=49 #49=(1,136,240,64)f32 #50=(1,64,136,240)f32
+pnnx.Expression          pnnx_expr_224            2 1 38 50 51 expr=add(@0,@1) #38=(1,64,136,240)f32 #50=(1,64,136,240)f32 #51=(1,64,136,240)f32
+nn.Conv2d                stages.2.1.dwconv        1 1 51 52 bias=True dilation=(1,1) groups=64 in_channels=64 kernel_size=(7,7) out_channels=64 padding=(3,3) padding_mode=zeros stride=(1,1) @bias=(64)f32 @weight=(64,1,7,7)f32 #51=(1,64,136,240)f32 #52=(1,64,136,240)f32
+Tensor.permute           Tensor.permute_12        1 1 52 53 dims=(0,2,3,1) $input=52 #52=(1,64,136,240)f32 #53=(1,136,240,64)f32
+nn.LayerNorm             ln_3                     1 1 53 54 elementwise_affine=True eps=1.000000e-06 normalized_shape=(64) @bias=(64)f32 @weight=(64)f32 $input=53 #53=(1,136,240,64)f32 #54=(1,136,240,64)f32
+nn.Linear                stages.2.1.pwconv1       1 1 54 55 bias=True in_features=64 out_features=256 @bias=(256)f32 @weight=(256,64)f32 #54=(1,136,240,64)f32 #55=(1,136,240,256)f32
+nn.GELU                  stages.2.1.act           1 1 55 56 #55=(1,136,240,256)f32 #56=(1,136,240,256)f32
+pnnx.Attribute           stages.2.1.grn           0 1 57 @data=(1,1,1,256)f32 #57=(1,1,1,256)f32
+pnnx.Attribute           pnnx_unique_10           0 1 58 @data=(1,1,1,256)f32 #58=(1,1,1,256)f32
+torch.norm               torch.norm_64            1 1 56 59 dim=(1,2) keepdim=True p=2 $input=56 #56=(1,136,240,256)f32 #59=(1,1,1,256)f32
+torch.mean               torch.mean_49            1 1 59 60 dim=(-1) keepdim=True $input=59 #59=(1,1,1,256)f32 #60=(1,1,1,1)f32
+pnnx.Expression          pnnx_expr_202            5 1 58 56 59 60 57 61 expr=add(add(mul(@0,mul(@1,div(@2,add(@3,1.000000e-06)))),@4),@1) #58=(1,1,1,256)f32 #56=(1,136,240,256)f32 #59=(1,1,1,256)f32 #60=(1,1,1,1)f32 #57=(1,1,1,256)f32 #61=(1,136,240,256)f32
+nn.Linear                stages.2.1.pwconv2       1 1 61 62 bias=True in_features=256 out_features=64 @bias=(64)f32 @weight=(64,256)f32 #61=(1,136,240,256)f32 #62=(1,136,240,64)f32
+Tensor.permute           Tensor.permute_13        1 1 62 63 dims=(0,3,1,2) $input=62 #62=(1,136,240,64)f32 #63=(1,64,136,240)f32
+pnnx.Expression          pnnx_expr_195            2 1 51 63 64 expr=add(@0,@1) #51=(1,64,136,240)f32 #63=(1,64,136,240)f32 #64=(1,64,136,240)f32
+Tensor.permute           op_0_11                  1 1 64 65 dims=(0,2,3,1) $input=64 #64=(1,64,136,240)f32
+nn.LayerNorm             op_1_10                  1 1 65 66 elementwise_affine=True eps=1.000000e-06 normalized_shape=(64) @bias=(64)f32 @weight=(64)f32
+Tensor.permute           op_2_9                   1 1 66 67 dims=(0,3,1,2) #67=(1,64,136,240)f32
+nn.Conv2d                downsample_layers.3.1    1 1 67 68 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(2,2) out_channels=128 padding=(0,0) padding_mode=zeros stride=(2,2) @bias=(128)f32 @weight=(128,64,2,2)f32 #67=(1,64,136,240)f32 #68=(1,128,68,120)f32
+nn.Conv2d                stages.3.0.dwconv        1 1 68 69 bias=True dilation=(1,1) groups=128 in_channels=128 kernel_size=(7,7) out_channels=128 padding=(3,3) padding_mode=zeros stride=(1,1) @bias=(128)f32 @weight=(128,1,7,7)f32 #68=(1,128,68,120)f32 #69=(1,128,68,120)f32
+Tensor.permute           Tensor.permute_14        1 1 69 70 dims=(0,2,3,1) $input=69 #69=(1,128,68,120)f32 #70=(1,68,120,128)f32
+nn.LayerNorm             ln_4                     1 1 70 71 elementwise_affine=True eps=1.000000e-06 normalized_shape=(128) @bias=(128)f32 @weight=(128)f32 $input=70 #70=(1,68,120,128)f32 #71=(1,68,120,128)f32
+nn.Linear                stages.3.0.pwconv1       1 1 71 72 bias=True in_features=128 out_features=512 @bias=(512)f32 @weight=(512,128)f32 #71=(1,68,120,128)f32 #72=(1,68,120,512)f32
+nn.GELU                  stages.3.0.act           1 1 72 73 #72=(1,68,120,512)f32 #73=(1,68,120,512)f32
+pnnx.Attribute           stages.3.0.grn           0 1 74 @data=(1,1,1,512)f32 #74=(1,1,1,512)f32
+pnnx.Attribute           pnnx_unique_13           0 1 75 @data=(1,1,1,512)f32 #75=(1,1,1,512)f32
+torch.norm               torch.norm_65            1 1 73 76 dim=(1,2) keepdim=True p=2 $input=73 #73=(1,68,120,512)f32 #76=(1,1,1,512)f32
+torch.mean               torch.mean_52            1 1 76 77 dim=(-1) keepdim=True $input=76 #76=(1,1,1,512)f32 #77=(1,1,1,1)f32
+pnnx.Expression          pnnx_expr_143            5 1 75 73 76 77 74 78 expr=add(add(mul(@0,mul(@1,div(@2,add(@3,1.000000e-06)))),@4),@1) #75=(1,1,1,512)f32 #73=(1,68,120,512)f32 #76=(1,1,1,512)f32 #77=(1,1,1,1)f32 #74=(1,1,1,512)f32 #78=(1,68,120,512)f32
+nn.Linear                stages.3.0.pwconv2       1 1 78 79 bias=True in_features=512 out_features=128 @bias=(128)f32 @weight=(128,512)f32 #78=(1,68,120,512)f32 #79=(1,68,120,128)f32
+Tensor.permute           Tensor.permute_15        1 1 79 80 dims=(0,3,1,2) $input=79 #79=(1,68,120,128)f32 #80=(1,128,68,120)f32
+pnnx.Expression          pnnx_expr_136            2 1 68 80 81 expr=add(@0,@1) #68=(1,128,68,120)f32 #80=(1,128,68,120)f32 #81=(1,128,68,120)f32
+torch.cat                torch.cat_36             2 1 81 81 82 dim=1 #81=(1,128,68,120)f32 #81=(1,128,68,120)f32 #82=(1,256,68,120)f32
+Tensor.permute           op_0_14                  1 1 82 83 dims=(0,2,3,1) $input=82 #82=(1,256,68,120)f32
+nn.LayerNorm             op_1_13                  1 1 83 84 elementwise_affine=True eps=1.000000e-06 normalized_shape=(256) @bias=(256)f32 @weight=(256)f32
+Tensor.permute           op_2_12                  1 1 84 85 dims=(0,3,1,2) #85=(1,256,68,120)f32
+nn.ConvTranspose2d       upsample_layers.0.1      1 1 85 86 bias=True dilation=(1,1) groups=1 in_channels=256 kernel_size=(2,2) out_channels=64 output_padding=(0,0) padding=(0,0) stride=(2,2) @bias=(64)f32 @weight=(256,64,2,2)f32 #85=(1,256,68,120)f32 #86=(1,64,136,240)f32
+torch.cat                torch.cat_37             2 1 86 64 87 dim=1 #86=(1,64,136,240)f32 #64=(1,64,136,240)f32 #87=(1,128,136,240)f32
+Tensor.permute           op_0_17                  1 1 87 88 dims=(0,2,3,1) $input=87 #87=(1,128,136,240)f32
+nn.LayerNorm             op_1_16                  1 1 88 89 elementwise_affine=True eps=1.000000e-06 normalized_shape=(128) @bias=(128)f32 @weight=(128)f32
+Tensor.permute           op_2_15                  1 1 89 90 dims=(0,3,1,2) #90=(1,128,136,240)f32
+nn.ConvTranspose2d       upsample_layers.1.1      1 1 90 91 bias=True dilation=(1,1) groups=1 in_channels=128 kernel_size=(2,2) out_channels=32 output_padding=(0,0) padding=(0,0) stride=(2,2) @bias=(32)f32 @weight=(128,32,2,2)f32 #90=(1,128,136,240)f32 #91=(1,32,272,480)f32
+torch.cat                torch.cat_38             2 1 91 34 92 dim=1 #91=(1,32,272,480)f32 #34=(1,32,272,480)f32 #92=(1,64,272,480)f32
+Tensor.permute           op_0_20                  1 1 92 93 dims=(0,2,3,1) $input=92 #92=(1,64,272,480)f32
+nn.LayerNorm             op_1_19                  1 1 93 94 elementwise_affine=True eps=1.000000e-06 normalized_shape=(64) @bias=(64)f32 @weight=(64)f32
+Tensor.permute           op_2_18                  1 1 94 95 dims=(0,3,1,2) #95=(1,64,272,480)f32
+nn.ConvTranspose2d       upsample_layers.2.1      1 1 95 96 bias=True dilation=(1,1) groups=1 in_channels=64 kernel_size=(2,2) out_channels=16 output_padding=(0,0) padding=(0,0) stride=(2,2) @bias=(16)f32 @weight=(64,16,2,2)f32 #95=(1,64,272,480)f32 #96=(1,16,544,960)f32
+torch.cat                torch.cat_39             2 1 96 17 97 dim=1 #96=(1,16,544,960)f32 #17=(1,16,544,960)f32 #97=(1,32,544,960)f32
+Tensor.permute           op_0_23                  1 1 97 98 dims=(0,2,3,1) $input=97 #97=(1,32,544,960)f32
+nn.LayerNorm             op_1_22                  1 1 98 99 elementwise_affine=True eps=1.000000e-06 normalized_shape=(32) @bias=(32)f32 @weight=(32)f32
+Tensor.permute           op_2_21                  1 1 99 100 dims=(0,3,1,2) #100=(1,32,544,960)f32
+nn.ConvTranspose2d       upsample_layers.3.1      1 1 100 101 bias=True dilation=(1,1) groups=1 in_channels=32 kernel_size=(2,2) out_channels=8 output_padding=(0,0) padding=(0,0) stride=(2,2) @bias=(8)f32 @weight=(32,8,2,2)f32 #100=(1,32,544,960)f32 #101=(1,8,1088,1920)f32
+nn.Conv2d                out_conv                 1 1 101 102 bias=True dilation=(1,1) groups=1 in_channels=8 kernel_size=(1,1) out_channels=3 padding=(0,0) padding_mode=zeros stride=(1,1) @bias=(3)f32 @weight=(3,8,1,1)f32 #101=(1,8,1088,1920)f32 #102=(1,3,1088,1920)f32
+pnnx.Output              pnnx_output_0            1 0 102 #102=(1,3,1088,1920)f32

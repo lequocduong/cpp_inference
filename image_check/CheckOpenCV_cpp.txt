@@ -1,0 +1,3 @@
+Check import OpenCV in C++
+
+Ref: https://docs.opencv.org/4.x/db/df5/tutorial_linux_gcc_cmake.html
